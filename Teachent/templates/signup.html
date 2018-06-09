@@ -1,8 +1,10 @@
+
+
 {% from "form_macros.html" import render_field %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Teachent</title>
+    <title>Signup</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="../static/login/images/icons/favicon.ico"/>
@@ -58,6 +60,10 @@
                     {{ form.username(size =50 ,placeholder="شناسه کاربری", class_="input100 myFont") }}
                     <span class="focus-input100 myFont"></span>
                 </div>
+                 <div>
+                    {{ form.email(size =50 ,placeholder="ایمیل", class_="input100 myFont") }}
+                    <span class="focus-input100 myFont"></span>
+                </div>
 
                 <div class="wrap-input100 validate-input" data-validate="Enter password">
 						<span class="btn-show-pass">
@@ -66,31 +72,23 @@
                     {{ form.password(size=50,placeholder="رمز عبور", class_="input100 myFont") }}
                     <span class="focus-input100 myFont"></span>
                 </div>
-                <div> {{ render_field(form.remember_me) }}</div>
-
+  <div class="wrap-input100 validate-input" data-validate="Enter password">
+						<span class="btn-show-pass">
+							<i class="zmdi zmdi-eye"></i>
+						</span>
+                    {{ form.password2(size=50,placeholder="تکرار رمز", class_="input100 myFont") }}
+                    <span class="focus-input100 myFont"></span>
+                </div>
 
                 <div class="container-login100-form-btn">
                     <div class="wrap-login100-form-btn">
                         <div class="login100-form-bgbtn"></div>
                         <button class="login100-form-btn myFont">
-                            ورود
+                            عضویت
                         </button>
                     </div>
                 </div>
 
-                <div class="text-center p-t-115">
-						<span class="txt1 r myFont">
-							حساب کاربری ندارید؟😱
-						</span>
-
-                    <a class="txt2 r myFont" href="{{ url_for('signup') }}">
-                        عضویت
-                    </a>
-                    <br>
-                    <a class="txt2 r myFont" href="{{ url_for('search') }}">
-                        صفحه اصلی
-                    </a>
-                </div>
 
             </form>
         </div>

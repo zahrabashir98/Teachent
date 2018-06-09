@@ -45,7 +45,7 @@
 <div class="limiter col-md-12">
     <div class="container-login100">
         <div class="wrap-login100">
-            <form action="" method="post">
+            <form action="" method="post" >
                 {{ form.hidden_tag() }}
                 <span class="login100-form-title p-b-26">
 						Teachent
@@ -54,25 +54,27 @@
                                 <i class="zmdi zmdi-font"></i>
                             </span>
         -->
-                <div>
-                    {{ form.username(size =50 ,placeholder="شناسه کاربری", class_="input100 myFont") }}
+                <div  >
+                    <div class="input100 myFont"> {{ render_field(form.username, size=50) }}</div>
                     <span class="focus-input100 myFont"></span>
                 </div>
 
-                <div class="wrap-input100 validate-input" data-validate="Enter password">
+                <div data-validate="Enter password">
 						<span class="btn-show-pass">
 							<i class="zmdi zmdi-eye"></i>
 						</span>
-                    {{ form.password(size=50,placeholder="رمز عبور", class_="input100 myFont") }}
+                    <div class="input100 myFont"> {{ render_field(form.password, size=50) }}
+
+                    </div>
                     <span class="focus-input100 myFont"></span>
                 </div>
                 <div> {{ render_field(form.remember_me) }}</div>
 
 
-                <div class="container-login100-form-btn">
+               <div class="container-login100-form-btn">
                     <div class="wrap-login100-form-btn">
                         <div class="login100-form-bgbtn"></div>
-                        <button class="login100-form-btn myFont">
+                        <button  class="login100-form-btn myFont">
                             ورود
                         </button>
                     </div>

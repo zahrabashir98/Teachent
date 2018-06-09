@@ -750,9 +750,9 @@
                             {% if current_user.is_authenticated %}
 
                             {% else %}
-                             <button class="login100-form-btn myFont2" style="margin-right: 0 ; padding: 0 30px !important; height: 30px !important; margin-top: -3px" >
+                              <a class="login100-form-btn myFont2" href="{{ url_for("signup") }}" style="margin-right: 0 ; padding: 0 35px !important; height: 30px !important; margin-top: -3px ">
                                 عضویت
-                            </button>
+                                </a>
 
                             {% endif %}
 

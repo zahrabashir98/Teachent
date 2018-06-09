@@ -40,16 +40,9 @@ def initdb():
                            courses="هیچی", university="علم و صنعت ایران", \
                            number='09121349726', rank='10,10', picLink="../static/img/woman3.jpg"))
 
-    db.session.add(Student(age='20', username='ariansh.exe', email='arian_fr2@yahoo.com', name='Arian', \
-                           surname='Shariat', password='Arjen71'))
-    # teachers.ad("sharifi")
+
     db.session.commit()
     print('Initialized the database')
-
-
-'''@manager.command
-def update():'''
-
 
 @manager.command
 def dropdb():

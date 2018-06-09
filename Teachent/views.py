@@ -2,7 +2,7 @@ from flask import render_template, request, redirect, url_for, flash
 from Teachent import *
 from Teachent.models import Teacher, Student
 from flask_login import login_required, login_user, logout_user, current_user
-from Teachent.forms import LoginForm
+from Teachent.forms import LoginForm, SignupForm
 
 
 class DataHandler():
@@ -34,6 +34,7 @@ class DataHandler():
 
     def redirectTo(self, index, users):
         return render_template(index, teachers=users)'''
+
 
 class SearchHandler():
     def __init__(self):
@@ -89,6 +90,7 @@ class UserLog:
 
         form = LoginForm()
         if form.validate_on_submit():
+            print(form.password.data)
             stu = Student.get_by_username(form.username.data)
             if stu is not None and stu.check_password(form.password.data):
                 login_user(stu, form.remember_me.data)
@@ -96,20 +98,34 @@ class UserLog:
                 flash("Logged in successfully as {}.".format(stu.username))
                 return redirect(request.args.get('next') or url_for('search'))
 
-            #flash('Incorrect username or password.')
+            # flash('Incorrect username or password.')
         return render_template('login.html', form=form)
-# app.add_url_rule('/login.html', view_func=Login.login)
+
+    # app.add_url_rule('/login.html', view_func=Login.login)
     @app.route('/logout')
     def logout():
         logout_user()
         return redirect(url_for('search'))
 
+    @app.route("/signup", methods=["GET", "POST"])
+    def signup():
+        form = SignupForm()
+        if form.validate_on_submit():
+            student = Student(email=form.email.data, \
+                              username=form.username.data, \
+                              password=form.password.data)
+            db.session.add(student)
+            db.session.commit()
+            login_user(student)
+            return redirect(url_for('search'))
+        return render_template("signup.html", form=form)
 
-# class attendPage():
-@app.route('/attend')
-@login_required
-def attend():
-    return render_template('attend.html')
+
+class attendPage():
+    @app.route('/attend')
+    @login_required
+    def attend():
+        return render_template('attend.html')
 
 
 class ProfilePage:
