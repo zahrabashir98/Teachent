@@ -35,7 +35,6 @@ class DataHandler():
     def redirectTo(self, index, users):
         return render_template(index, teachers=users)'''
 
-
 class SearchHandler():
     def __init__(self):
         pass
