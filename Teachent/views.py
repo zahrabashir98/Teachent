@@ -2,7 +2,7 @@ from flask import render_template, request, redirect, url_for, flash
 from Teachent import *
 from Teachent.models import Teacher, Student
 from flask_login import login_required, login_user, logout_user, current_user
-from Teachent.forms import LoginForm, SignupForm
+from Teachent.forms import LoginForm, StudentSignupForm
 
 
 class DataHandler():
@@ -83,7 +83,7 @@ class SearchPage:
 def load_user(userid):
     return Student.query.get(int(userid))
 
-
+#TODO
 class UserLog:
     @app.route('/login', methods=["GET", "POST"])
     def login():
@@ -109,7 +109,7 @@ class UserLog:
 
     @app.route("/signup", methods=["GET", "POST"])
     def signup():
-        form = SignupForm()
+        form = StudentSignupForm()
         if form.validate_on_submit():
             student = Student(email=form.email.data, \
                               username=form.username.data, \
