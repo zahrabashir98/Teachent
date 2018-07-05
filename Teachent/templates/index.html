@@ -822,11 +822,12 @@
    <div class="w3-row-padding w3-padding-16 w3-center" id="food">
                 {% for teacher in teachers %}
                    <div class="w3-quarter">
-                     <img src="{{ teacher.picLink }}" alt="teacher" style="width:100%">
-                        <h3>{{ teacher.name }} {{ teacher.surname }}</h3>
+                     <img src=" {% if teacher.gender=="Male" %}../static/img/man.jpg {% else  %}../static/img/woman.jpg{% endif %}" alt="teacher" style="width:100%">
+                        <h3>{{ teacher.name }} {{ teacher.surName }}</h3>
                             <a class="buttonstyle" href="{{ url_for('user', username=teacher.username) }}">پروفایل</a>
                              </div>
                 {% endfor %}
+
 
 </div>
 <div class="w3-row-padding w3-padding-16 w3-center" id="food">

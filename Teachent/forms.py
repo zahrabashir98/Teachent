@@ -1,27 +1,25 @@
 from flask_wtf import Form
 from wtforms.fields import StringField, PasswordField, BooleanField, SubmitField, IntegerField, SelectField
 from wtforms.validators import DataRequired, Length, Email, Regexp, EqualTo, \
-    url, ValidationError, NumberRange
+     ValidationError, NumberRange
 from Teachent.models import Student
 
 
 class LoginForm(Form):
     username = StringField('', validators=[DataRequired()])
     password = PasswordField('', validators=[DataRequired()])
-    remember_me = BooleanField('Keep me logged in')
+    remember = BooleanField('Keep me logged in')
     submit = SubmitField('Submit')
 
 
 class StudentSignupForm(Form):
     name = StringField('Name', validators=[DataRequired()])
     surName = StringField('SurName', validators=[DataRequired()])
-    age = IntegerField('Age', validators=[DataRequired(), NumberRange(min=9, max=99)])
-    identificationId = IntegerField('IdentId', validators=[DataRequired(), Length(3, 10)])
+    age = IntegerField('Age', validators=[DataRequired()])
+    identificationId = IntegerField('IdentId', validators=[DataRequired()])
     address = StringField('Address', validators=[DataRequired(), Length(1, 200)])
-    gender = SelectField(u'Gender', choices=[('زن'), ('مرد')])
-
-    # female=BooleanField('Female',)
-    # male=BooleanField('Male')
+    gender = SelectField(u'Gender', choices=[('Female', 'زن'), ('Male', 'مرد')])
+    postalCode = StringField('Postal', validators=[DataRequired(), Length(1, 20)])
 
     username = StringField('Username',
                            validators=[
@@ -36,6 +34,7 @@ class StudentSignupForm(Form):
     password2 = PasswordField('Confirm password', validators=[DataRequired()])
     email = StringField('Email',
                         validators=[DataRequired(), Length(1, 120), Email()])
+   # submit = SubmitField('Submit')
 
     def validate_email(self, email_field):
         if Student.query.filter_by(email=email_field.data).first():
@@ -49,15 +48,14 @@ class StudentSignupForm(Form):
 class TeacherSignupForm(Form):
     name = StringField('Name', validators=[DataRequired()])
     surName = StringField('SurName', validators=[DataRequired()])
-    age = IntegerField('Age', validators=[DataRequired(), NumberRange(min=9, max=99)])
-    identificationId = IntegerField('IdentId', validators=[DataRequired(), Length(3, 10)])
-    address = StringField('Address', validators=[DataRequired(), Length(1, 200)])
-    gender = SelectField(u'Gender', choices=[('زن'), ('مرد')])
-    mariddalState=SelectField(u'MariddalState',choices=[('مجرد'),('متاهل'),(' ')])
-    major=StringField('Major',validators=[DataRequired()])
-    education =StringField('Education',validators=[DataRequired()])
-    rank=IntegerField('Rank',validators=[DataRequired(),Length(1,5)])
-    teachingExperience=StringField('TeachingEx',validators=[DataRequired(),Length(0,30)])
+    age = IntegerField('Age', validators=[DataRequired()])
+    identificationId = IntegerField('IdentId', validators=[DataRequired()])
+    gender = SelectField(u'Gender', choices=[("Female",'زن'), ("Male",'مرد')])
+    mariddalState = SelectField(u'MariddalState', choices=[("Single",'مجرد'), ("Taken",'متاهل')])
+    major = StringField('Major', validators=[DataRequired()])
+    education = StringField('Education', validators=[DataRequired()])
+    rank = IntegerField('Rank', validators=[DataRequired(), NumberRange(1, 100000)])
+    courses = SelectField(u'Courses', choices=[("Chemistry", 'شیمی'), ("Physics", 'فیزیک'), ("Biology", 'زیست'), ("Literature", 'ادبیات')])
 
     username = StringField('Username',
                            validators=[

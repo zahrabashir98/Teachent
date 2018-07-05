@@ -76,7 +76,7 @@
     <h2 class="text-primary1">Teachent</h2>
     <a class="navbar-brand js-scroll-trigger" href="#page-top">
         <span class="d-none d-lg-block">
-          <img class="../static/img/img-fluid img-profile rounded-circle mx-auto mb-2" src="{{ user.picLink }}" alt="">
+          <img class="../static/img/img-fluid img-profile rounded-circle mx-auto mb-2" src="  {% if user.gender=="Male" %}../static/img/man.jpg {% else %}../static/img/woman.jpg{% endif %}" alt="">
         </span>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -90,13 +90,13 @@
                 <h5 class="nav-link js-scroll-trigger text-primary1 myInfo "> :تعداد دوره </h5>
             </li>
             <li class="nav-item">
-                <h6 class="nav-link js-scroll-trigger text-primary1" href="#experience">123</h6>
+                <h6 class="nav-link js-scroll-trigger text-primary1" href="#experience">10</h6>
             </li>
             <li class="nav-item">
                 <h5 class="nav-link js-scroll-trigger text-primary1 myInfo" href="#education">: رتبه </h5>
             </li>
             <li class="nav-item">
-                <h6 class="nav-link js-scroll-trigger text-primary1" href="#skills">{{ user.rank }}</h6>
+                <h6 class="nav-link js-scroll-trigger text-primary1" href="#skills">12 </h6>
             </li>
             <li class="nav-item">
                 <a class="nav-link js-scroll-trigger myInfo" href="#interests">برنامه هفتگی</a>
@@ -117,7 +117,7 @@
         <section class="resume-section col-md-11  " style="text-align: right" id="about">
             <div class="my-auto">
                 <h1 class=" style_text myInfo">{{ user.name }}
-                    <span class="text-primary">{{ user.surname }}</span>
+                    <span class="text-primary">{{ user.surName }}</span>
                 </h1>
                 <hr>
                 <h3 class="mb-3 myInfo" style="margin-left: 78% ; margin-top: 5%">سن :
@@ -126,29 +126,32 @@
 
                 </h3>
                 <h3 class="mb-1 myInfo" style="margin-left: 70% ; margin-top: 1%">رتبه کنکور :
-                    <span class="text-primary myInfo">{{ user.konkoorRank }}</span>
+                    <span class="text-primary myInfo">{{ user.rank }}</span>
                 </h3>
-                <h3 class="mb-1 myInfo" style="margin-left: 62% ; margin-top: 1%">مدرک تحصیلی :
-                    <span class="text-primary myInfo">{{ user.madrak }}</span>
+                <!-- <h3 class="mb-1 myInfo" style="margin-left: 62% ; margin-top: 1%">مدرک تحصیلی :
+                     <span class="text-primary myInfo"></span> -->
                 </h3>
                 <h3 class="mb-1 myInfo" style="margin-left: 49.5% ; margin-top: 1%">رشته تحصیلی :
-                    <span class="text-primary myInfo">{{ user.reshte}}</span>
+                    <span class="text-primary myInfo">{{ user.major }}</span>
                 </h3>
                 <h3 class="mb-1 myInfo" style="margin-left: 62% ; margin-top: 1%">دانشگاه :
-                    <span class="text-primary myInfo">{{ user.university }} </span>
+                    <span class="text-primary myInfo">{{ user.education }} </span>
                 </h3>
                 <hr>
                 <!----------- (second part) ------------->
                 <h3 class="mb-1 myInfo" style="margin-left: 51% ; margin-top: 1%">مدرس دروس :
-                    <span class="text-primary myInfo">{{ user.courses }} </span>
-                </h3>
+                    {% for course in courses %}
+                        <h3 class="mb-1 myInfo" style="margin-left: 51% ; margin-top: 1%">مدرس دروس :
+                            <span class="text-primary myInfo">{{ course.name }} </span>
+                        </h3>
+                    {% endfor %}                </h3>
                 <hr>
                 <!------------ contact teacher part ------------>
                 <h3 class="mb-1 myInfo" style="margin-left: 68% ; margin-top: 1%"> : ارتباط با استاد
                 </h3>
-                <h4 class="mb-1 myInfo" style="margin-left: 60% ; margin-top: 2%"> شماره تماس :
-                    <span class="text-primary myInfo">{{ user.number }} </span>
-                </h4>
+                <!-- <h4 class="mb-1 myInfo" style="margin-left: 60% ; margin-top: 2%"> شماره تماس :
+                     <span class="text-primary myInfo"> </span>
+                 </h4> -->
                 <h4 class="mb-1 myInfo" style="margin-left: 56.5% ; margin-top: 1%">
                     <span class="text-primary myInfo"> {{ user.email }}</span>
                 </h4>

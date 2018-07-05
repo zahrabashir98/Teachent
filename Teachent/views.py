@@ -1,8 +1,8 @@
 from flask import render_template, request, redirect, url_for, flash
 from Teachent import *
-from Teachent.models import Teacher, Student
+from Teachent.models import Teacher, Student, Course, StudentCourseRel
 from flask_login import login_required, login_user, logout_user, current_user
-from Teachent.forms import LoginForm, StudentSignupForm
+from Teachent.forms import LoginForm, StudentSignupForm, TeacherSignupForm
 
 
 class DataHandler():
@@ -83,7 +83,8 @@ class SearchPage:
 def load_user(userid):
     return Student.query.get(int(userid))
 
-#TODO
+
+# TODO
 class UserLog:
     @app.route('/login', methods=["GET", "POST"])
     def login():
@@ -91,12 +92,20 @@ class UserLog:
         form = LoginForm()
         if form.validate_on_submit():
             print(form.password.data)
-            stu = Student.get_by_username(form.username.data)
-            if stu is not None and stu.check_password(form.password.data):
-                login_user(stu, form.remember_me.data)
-                print("user found. redirecting...")
-                flash("Logged in successfully as {}.".format(stu.username))
-                return redirect(request.args.get('next') or url_for('search'))
+            if Student.get_by_username(form.username.data):
+                stu = Student.get_by_username(form.username.data)
+                if stu is not None and stu.check_password(form.password.data):
+                    login_user(stu, form.remember.data)
+                    print("user found. redirecting...")
+                    flash("Logged in successfully as {}.".format(stu.username))
+                    return redirect(request.args.get('next') or url_for('search'))
+                if Student.get_by_username(form.username.data):
+                    tea = Teacher.get_by_username(form.username.data)
+                    if tea is not None and tea.check_password(form.password.data):
+                        login_user(tea, form.remember.data)
+                        print("user found. redirecting...")
+                        flash("Logged in successfully as {}.".format(stu.username))
+                        return redirect(request.args.get('next') or url_for('search'))
 
             # flash('Incorrect username or password.')
         return render_template('login.html', form=form)
@@ -109,16 +118,56 @@ class UserLog:
 
     @app.route("/signup", methods=["GET", "POST"])
     def signup():
-        form = StudentSignupForm()
-        if form.validate_on_submit():
-            student = Student(email=form.email.data, \
-                              username=form.username.data, \
-                              password=form.password.data)
+        sform = StudentSignupForm()
+        tform = TeacherSignupForm()
+        #if request.method == "POST":
+            #print("YYYYYY")
+
+        if sform.validate_on_submit():
+            print("SS")
+            student = Student(name=sform.name.data, \
+                            surName=sform.surName.data, \
+                            age=sform.age.data, \
+                            identificationId=sform.identificationId.data, \
+                            address=sform.address.data, \
+                            gender=sform.gender.data, \
+                            postalCode=sform.postalCode.data, \
+                            username=sform.username.data, \
+                            password=sform.password.data, \
+                            email=sform.email.data, \
+                              )
             db.session.add(student)
             db.session.commit()
             login_user(student)
             return redirect(url_for('search'))
-        return render_template("signup.html", form=form)
+
+        #if tform.validate_on_submit():
+
+        elif request.method == "POST":
+
+            print("TS")
+            teacher = Teacher(name=tform.name.data, \
+                              surName=tform.surName.data, \
+                              age=tform.age.data, \
+                              identificationId=tform.identificationId.data, \
+                              gender=tform.gender.data, \
+                              mariddalState=tform.mariddalState.data, \
+                              major=tform.major.data, \
+                              education=tform.education.data, \
+                              rank=tform.rank.data, \
+                              username=tform.username.data, \
+                              password=tform.password.data, \
+                              email=tform.email.data, \
+                              )
+            db.session.add(teacher)
+            db.session.commit()
+            login_user(teacher)
+            course = Course(name=tform.courses.data, TeachersID=teacher.id)
+            db.session.add(course)
+            db.session.commit()
+
+            return redirect(url_for('search'))
+        return render_template("khodam.html", sform=sform, tform=tform)
 
 
 class attendPage():
@@ -134,7 +183,8 @@ class ProfilePage:
     def user(username):
         datah = DataHandler()
         user = datah.getDataFromDataBase_ByUName(username)
-        return render_template('profile.html', user=user)
+        course = Course.query.filter_by(TeachersID=user.id).all()
+        return render_template('profile.html', user=user, courses=course)
 
 
 # app.add_url_rule('/teacher/<username>', view_func=ProfilePage.user)
