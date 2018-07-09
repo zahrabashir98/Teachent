@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="login/vendor1/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="login/fonts/iconic/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="login/vendor1/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="login/vendor1/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="login/vendor1/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="login/vendor1/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="login/vendor1/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="login/css/util.css">
+    <link rel="stylesheet" type="text/css" href="login/css/main.css">
+    <style>
+        @font-face {
+            font-family: "MyFonta";
+            src: url(fonts/IRANSansWeb_Bold.ttf);
+        }
+
+        .myFont {
+            font-family: MyFonta;
+        }
+
+        .r {
+            direction: rtl;
+        }
+
+        #loginPage {
+            background-image: url("800px_COLOURBOX25970540 2.jpg") !important;
+        }
+
+        .container-login100 {
+            background: none !important;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* Full-width input fields */
+        input[type="text"], input[type="password"] {
+            width: 80%;
+            padding: 5px 10px;
+            margin: 8px 0;
+            margin-right: 0px;
+            margin-left: 0px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-left: 50%;
+            margin-right: 10%;
+            box-sizing: border-box;
+            border-color: black;
+        }
+
+        /* Set a style for all buttons */
+        button {
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 10%;
+            text-align: center;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        /* Extra styles for the cancel button */
+        .cancelbtn {
+            width: auto;
+            padding: 10px 18px;
+            background-color: #f44336;
+        }
+
+        /* Center the image and position the close button */
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+            position: relative;
+        }
+
+        img.avatar {
+            width: 40%;
+            border-radius: 50%;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        span.psw {
+            float: right;
+            padding-top: 16px;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #020038;
+            margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+            border: 1px solid;
+            width: 30%; /* Could be more or less, depending on screen size */
+        }
+
+        /* The Close Button (x) */
+        .close {
+            position: absolute;
+            right: 25px;
+            top: 0;
+            color: #2A679F;
+            margin-top: 1%;
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: red;
+            cursor: pointer;
+        }
+
+        /* Add Zoom Animation */
+        .animate {
+            -webkit-animation: animatezoom 0.6s;
+            animation: animatezoom 0.6s
+        }
+
+        .headtext {
+            margin-right: 43.5%;
+            margin-bottom: 40%;
+            font-size: 160%;
+            color: white;
+        }
+
+        .login100-form-btn {
+            font-size: 15px;
+            color: #fff;
+            line-height: 0.5;
+            text-transform: uppercase;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 20px;
+            width: 100%;
+            height: 30px;
+        }
+
+        @-webkit-keyframes animatezoom {
+            from {
+                -webkit-transform: scale(0)
+            }
+            to {
+                -webkit-transform: scale(1)
+            }
+        }
+
+        @keyframes animatezoom {
+            from {
+                transform: scale(0)
+            }
+            to {
+                transform: scale(1)
+            }
+        }
+
+        /* Change styles for span and cancel button on extra small screens */
+        @media screen and (max-width: 300px) {
+            span.psw {
+                display: block;
+                float: none;
+            }
+
+            .cancelbtn {
+                width: 100%;
+            }
+        }
+
+        .container-login100-form-btn {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding-top: 13px;
+
+        }
+
+        .wrap-login100-form-btn {
+            width: 100%;
+            display: block;
+            position: relative;
+            z-index: 1;
+            border-radius: 25px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body id="loginPage" class="myFont r">
+
+<div class="limiter col-md-12">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <form class="login100-form validate-form">
+					<span class="login100-form-title p-b-26">
+						Teachent
+					</span>
+                <div class="text-center">
+                    <hr class="txt1 myFont r">
+                    نوع کاربری خود را مشخص کنید
+                    <hr>
+                </div>
+
+            </form>
+            <div class="container-login100-form-btn" style="width: 80% ; margin-right: 10%">
+                <div class="wrap-login100-form-btn">
+                    <div class="login100-form-bgbtn "></div>
+                    <button class="login100-form-btn myFont r" style="text-align: justify"
+                            onclick="document.getElementById('id01').style.display='block'">
+                        دانش آموز
+                    </button>
+                </div>
+            </div>
+            <div class="container-login100-form-btn" style="width: 80% ; margin-right: 10%">
+                <div class="wrap-login100-form-btn">
+                    <div class="login100-form-bgbtn"></div>
+                    <button class="login100-form-btn myFont"
+                            onclick="document.getElementById('id02').style.display='block'">
+                        استاد
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="id01" class="modal">
+    <div class="login100-form-title myFont r" style="color: white">
+        لطفا فرم زیر را پر کنید
+    </div>
+    <form class="modal-content animate" action="/action_page.php">
+        <div class="imgcontainer">
+            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+        </div>
+        <div class="container">
+            <input type="text" placeholder="نام" name="نام" required>
+            <input type="text" placeholder="نام خانوادگی" name="نام خانوادگی" required>
+            <input type="text" placeholder="سن" name="سن" required>
+            <input type="text" placeholder="کد ملی" name="کد ملی" required>
+            <input type="text" placeholder="ایمیل" name="ایمیل" required>
+            <input type="text" placeholder="آدرس" name="آدرس" required>
+            <input type="text" placeholder="کد پستی" name="کد پستی" required>
+            <input type="password" placeholder="رمز" name="رمز" required>
+            <input type="password" placeholder="تکرار رمز" name="تکرار رمز" required>
+            <form action="/action_page.php" method="get">
+                <input type="checkbox" name="man" value="man" style="margin-right: 40px"> <b
+                    style="color: white" class="myFont"> مرد</b> <br>
+                <input type="checkbox" name="woman" value="woman" style="margin-right: 40px"> <b
+                    style="color: white" class="myFont">زن </b> <br>
+            </form>
+            <div class="container-login100-form-btn" style="width: 60% ; margin-right: 17%">
+                <div class="wrap-login100-form-btn">
+                    <div class="login100-form-bgbtn"></div>
+                    <button class="login100-form-btn myFont">
+                        ثبت نام
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<div id="id02" class="modal">
+    <span class="headtext"> لطفا فرم زیر را پر کنید</span>
+    <form class="modal-content animate" action="/action_page.php">
+        <div class="imgcontainer">
+            <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+        </div>
+
+
+        <div class="container">
+            <input type="text" placeholder="نام" name="نام" required>
+            <input type="text" placeholder="نام خانوادگی" name="نام خانوادگی" required>
+            <input type="text" placeholder="سن" name="سن" required>
+            <input type="text" placeholder="کد ملی" name="کد ملی" required>
+            <input type="text" placeholder="تحصیلات" name="تحصیلات" required>
+            <input type="text" placeholder="رشته" name="رشته" required>
+            <input type="text" placeholder="رتبه کنکور" name="رتبه کنکور" required>
+            <input type="text" placeholder="سابقه تدریس" name="سابقه تدریس" required>
+            <input type="text" placeholder="ایمیل" name="ایمیل" required>
+            <input type="password" placeholder="رمز" name="رمز" required>
+            <input type="password" placeholder="تکرار رمز" name="تکرار رمز" required>
+            <form action="/action_page.php" method="get">
+               <span>
+                   <input type="checkbox" name="man" value="man" style="margin-right: 40px"> <b
+                       style="color: white" class="myFont"> مرد</b> <br>
+                <input type="checkbox" name="woman" value="woman" style="margin-right: 40px"> <b
+                       style="color: white" class="myFont">زن </b> <br>
+                   </span>
+                <span>
+                    <input type="checkbox" name="single" value="single" style="margin-right: 40px "> <b
+                        style="color: white" class="myFont"> مجرد</b> <br>
+                    <input type="checkbox" name="married" value="married" style="margin-right: 40px"> <b
+                        style="color: white" class="myFont">متاهل </b> <br>
+                    <input type="checkbox" name="single" value="single" style="margin-right: 40px"> <b
+                            style="color: white" class="myFont"> ریاضی </b>
+                    <input type="checkbox" name="married" value="married" style="margin-right: 40px"> <b
+                            style="color: white" class="myFont">فیزیک </b> <br>
+                    <input type="checkbox" name="single" value="single" style="margin-right: 40px"> <b
+                            style="color: white" class="myFont"> شیمی </b>
+                    <input type="checkbox" name="married" value="married" style="margin-right: 44px"> <b
+                            style="color: white" class="myFont"> زیست </b><br>
+                </span>
+            </form>
+            <div class="container-login100-form-btn" style="width: 60% ; margin-right: 17%">
+                <div class="wrap-login100-form-btn">
+                    <div class="login100-form-bgbtn"></div>
+                    <button class="login100-form-btn myFont">
+                        ثبت نام
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+    var modal2 = document.getElementById('id02');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal || vent.target == modal2) {
+            modal.style.display = "none";
+            modal2.style.display = "none";
+        }
+    }
+</script>
+<div id="dropDownSelect1"></div>
+
+<script src="login/vendor1/jquery/jquery-3.2.1.min.js"></script>
+<script src="login/vendor1/animsition/js/animsition.min.js"></script>
+<script src="login/vendor1/bootstrap/js/popper.js"></script>
+<script src="login/vendor1/bootstrap/js/bootstrap.min.js"></script>
+<script src="login/vendor1/select2/select2.min.js"></script>
+<script src="login/vendor1/daterangepicker/moment.min.js"></script>
+<script src="login/vendor1/daterangepicker/daterangepicker.js"></script>
+<script src="login/vendor1/countdowntime/countdowntime.js"></script>
+<script src="login/js/main.js"></script>
+
+</body>
+</html>
